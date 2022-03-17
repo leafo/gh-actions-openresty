@@ -52,7 +52,7 @@ The version to install, see https://openresty.org/en/download.html#source-code-r
 
 ### `configureFlags`
 
-**Default**: `null`
+**Default**: `"--with-pcre-jit --with-ipv6"`
 
 Additional flags passed to the `./configure` step of the build.
 
