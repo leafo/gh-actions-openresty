@@ -37,7 +37,7 @@ const main = async () => {
     await io.mkdirP(extractPath)
     await tc.extractTar(sourceTar, BUILD_PREFIX)
 
-    const configureFlagsArray = ["-j"]
+    const configureFlagsArray = ["-j4"]
     if (configureFlags) {
       configureFlagsArray.push(configureFlags)
     }
