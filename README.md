@@ -21,18 +21,13 @@ on: [push, pull_request]
 
 jobs:
   test:
-    strategy:
-      fail-fast: false
-      matrix:
-        openrestyVersion: ["1.19.9.1"]
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@master
     - uses: leafo/gh-actions-openresty@main
       with:
-        openrestyVersion: ${{ matrix.openrestyVersion }}
+        openrestyVersion: "1.19.9.1"
 
     - name: run resty
       run: resty -e 'print("hi from lua")'

@@ -5,6 +5,9 @@ const io = require("@actions/io")
 const tc = require("@actions/tool-cache")
 const cache = require("@actions/cache")
 
+const notice = (msg) => core.notice(`gh-actions-openresty: ${msg}`)
+const warning = (msg) => core.warning(`gh-actions-openresty: ${msg}`)
+
 const path = require("path")
 
 const BUILD_PREFIX = ".openresty"
@@ -25,9 +28,9 @@ const main = async () => {
   if (core.getInput('buildCache') == 'true') {
     restoredCache = await cache.restoreCache(cachePaths, cacheKey)
     if (restoredCache) {
-      core.notice(`Cache restored: ${restoredCache}`)
+      notice(`Cache restored: ${restoredCache}`)
     } else {
-      core.notice(`No cache available, clean build`)
+      notice(`No cache available, clean build`)
     }
   }
 
@@ -56,11 +59,11 @@ const main = async () => {
   })
 
   if (core.getInput('buildCache') == 'true' && !restoredCache) {
-    core.notice(`Storing into cache: ${cacheKey}`)
+    notice(`Storing into cache: ${cacheKey}`)
     try {
       await cache.saveCache(cachePaths, cacheKey)
     } catch (e) {
-      core.warning(`Failed to save to cache (continuing anyway): ${e}`)
+      warning(`Failed to save to cache (continuing anyway): ${e}`)
     }
   }
 
