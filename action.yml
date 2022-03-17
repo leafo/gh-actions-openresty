@@ -14,7 +14,7 @@ inputs:
     description: "Command line flags passed to configure"
     required: false
   buildCache:
-    description: "Set to 'false' to skip restoring .lua from cache and always compile it"
+    description: "Set to 'false' to force rebuild of OpenResty on every run"
     required: false
     default: 'true'
 

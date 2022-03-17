@@ -29,8 +29,9 @@ const main = async () => {
   await exec.exec(`sudo make install`, undefined, {
     cwd: extractPath
   })
-}
 
+  core.addPath("/usr/local/openresty/bin")
+}
 
 
 main().catch(err => {
