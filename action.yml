@@ -12,11 +12,12 @@ inputs:
     default: "1.19.9.1"
   configureFlags:
     description: "Command line flags passed to configure"
+    default: "--with-pcre-jit --with-ipv6"
     required: false
   buildCache:
-    description: "Set to 'false' to force rebuild of OpenResty on every run"
+    description: "Set to `false` to force rebuild of OpenResty on every run"
     required: false
-    default: 'true'
+    default: "true"
 
 runs:
   using: 'node16'
