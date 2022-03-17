@@ -25,7 +25,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - uses: leafo/gh-actions-openresty@main
+    - uses: leafo/gh-actions-openresty@v1
       with:
         openrestyVersion: "1.19.9.1"
 
@@ -34,6 +34,11 @@ jobs:
 
     - name: run opm
       run: opm --cwd install leafo/pgmoon
+
+    # This will install luarocks, configured to use luajit that comes with openresty
+    - uses: leafo/gh-actions-luarocks@v4
+      with:
+        withLuaPath: "/usr/local/openresty/luajit/"
 ```
 
 
