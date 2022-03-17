@@ -17,7 +17,7 @@ const main = async () => {
 
   const extractPath = path.join(process.cwd(), BUILD_PREFIX, `openresty-${openrestyVersion}`)
 
-  const cachePaths = [".openresty"]
+  const cachePaths = [BUILD_PREFIX]
   const cacheKey = makeCacheKey(openrestyVersion, configureFlags || "")
 
   let restoredCache = null
@@ -55,7 +55,7 @@ const main = async () => {
     cwd: extractPath
   })
 
-  if (core.getInput('buildCache') == 'true') {
+  if (core.getInput('buildCache') == 'true' && not restoredCache) {
     core.notice(`Storing into cache...`)
     try {
       await cache.saveCache(cachePaths, cacheKey)
@@ -65,6 +65,12 @@ const main = async () => {
   }
 
   core.addPath("/usr/local/openresty/bin")
+
+
+  await exec.exec(`rm -rf `, [BUILD_PREFIX], {
+    cwd: extractPath
+  })
+
 
   // TODO: delete the .openresty folder
 }

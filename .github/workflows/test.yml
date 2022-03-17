@@ -17,9 +17,6 @@ jobs:
       with:
         openrestyVersion: ${{ matrix.openrestyVersion }}
 
-    - name: show working files
-      run: find .openresty
-
     - name: test resty
       run: resty -e 'print("hi from lua")'
 
