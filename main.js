@@ -16,7 +16,12 @@ const main = async () => {
   const sourceTar = await tc.downloadTool(`https://openresty.org/download/openresty-${openrestyVersion}.tar.gz`)
   
   await io.mkdirP(extractPath)
-  await tc.extractTar(sourceTar, extractPath)
+  await tc.extractTar(sourceTar, BUILD_PREFIX)
+
+  await exec.exec(`./configure"`, undefined, {
+    cwd: extractPath
+  })
+
 }
 
 
