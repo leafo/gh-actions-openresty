@@ -26,7 +26,7 @@ const main = async () => {
     cwd: extractPath
   })
 
-  await exec.exec(`make install`, undefined, {
+  await exec.exec(`sudo make install`, undefined, {
     cwd: extractPath
   })
 }
