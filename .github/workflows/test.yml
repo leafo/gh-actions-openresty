@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - uses: leafo/gh-actions-openresty@master
+    - uses: leafo/gh-actions-openresty@main
       with:
         openrestyVersion: ${{ matrix.openrestyVersion }}
 
