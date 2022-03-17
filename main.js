@@ -11,12 +11,12 @@ const BUILD_PREFIX = ".openresty"
 const main = async () => {
   const openrestyVersion = core.getInput('openrestyVersion', { required: true })
 
-  const luaRocksExtractPath = path.join(process.cwd(), BUILD_PREFIX, `luarocks-${luaRocksVersion}`)
+  const extractPath = path.join(process.cwd(), BUILD_PREFIX, `openresty-${openrestyVersion}`)
   
   const sourceTar = await tc.downloadTool(`https://openresty.org/download/openresty-${openrestyVersion}.tar.gz`)
   
-  await io.mkdirP(luaRocksExtractPath)
-  await tc.extractTar(sourceTar, INSTALL_PREFIX)
+  await io.mkdirP(extractPath)
+  await tc.extractTar(sourceTar, extractPath)
 }
 
 
