@@ -9,21 +9,22 @@ const path = require("path")
 
 const BUILD_PREFIX = ".openresty"
 
-const makeCacheKey = openrestyVersion => `openresty-${openrestyVersion}-${process.platform}-${process.arch}`
+const makeCacheKey = (openrestyVersion, configureFlags) => `openresty-${openrestyVersion}-${process.platform}-${process.arch}-${configureFlags}`
 
 const main = async () => {
   const openrestyVersion = core.getInput('openrestyVersion', { required: true })
+  const configureFlags = core.getInput('configureFlags')
 
   const extractPath = path.join(process.cwd(), BUILD_PREFIX, `openresty-${openrestyVersion}`)
 
   const cachePaths = [".openresty"]
-  const cacheKey = makeCacheKey(openrestyVersion)
+  const cacheKey = makeCacheKey(openrestyVersion, configureFlags || "")
 
   let restoredCache = null
 
   if (core.getInput('buildCache') == 'true') {
     restoredCache = await cache.restoreCache(cachePaths, cacheKey)
-    core.info(`Cache restored: ${restoredCache}`)
+    core.notice(`Cache restored: ${restoredCache}`)
   }
 
   if (!restoredCache) {
@@ -32,11 +33,16 @@ const main = async () => {
     await io.mkdirP(extractPath)
     await tc.extractTar(sourceTar, BUILD_PREFIX)
 
-    await exec.exec(`./configure"`, undefined, {
+    const configureFlagsArray = []
+    if (configureFlags) {
+      configureFlagsArray.push(configureFlags)
+    }
+
+    await exec.exec(`./configure"`, configureFlagsArray, {
       cwd: extractPath
     })
 
-    await exec.exec(`make`, undefined, {
+    await exec.exec(`make`, ["-j"], {
       cwd: extractPath
     })
   }
@@ -46,9 +52,9 @@ const main = async () => {
   })
 
   if (core.getInput('buildCache') == 'true') {
-    core.info(`Storing into cache...`)
+    core.notice(`Storing into cache...`)
     try {
-      await ch.saveCache(cachePaths, cacheKey)
+      await cache.saveCache(cachePaths, cacheKey)
     } catch (e) {
       core.warning(`Failed to save to cache (continuing anyway): ${e}`)
     }
