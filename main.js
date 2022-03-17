@@ -37,12 +37,12 @@ const main = async () => {
     await io.mkdirP(extractPath)
     await tc.extractTar(sourceTar, BUILD_PREFIX)
 
-    const configureFlagsArray = ["-j4"]
+    let finalConfigureFlags = "-j4"
     if (configureFlags) {
-      configureFlagsArray.push(configureFlags)
+      finalConfigureFlags = `${finalConfigureFlags} ${configureFlags}`
     }
 
-    await exec.exec(`./configure"`, configureFlagsArray, {
+    await exec.exec(`./configure"`, finalConfigureFlags, {
       cwd: extractPath
     })
 
