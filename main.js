@@ -55,7 +55,7 @@ const main = async () => {
     cwd: extractPath
   })
 
-  if (core.getInput('buildCache') == 'true' && not restoredCache) {
+  if (core.getInput('buildCache') == 'true' && !restoredCache) {
     core.notice(`Storing into cache...`)
     try {
       await cache.saveCache(cachePaths, cacheKey)
