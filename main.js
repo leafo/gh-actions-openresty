@@ -9,7 +9,7 @@ const path = require("path")
 
 const BUILD_PREFIX = ".openresty"
 
-const makeCacheKey = (openrestyVersion, configureFlags) => `openresty-${openrestyVersion}-${process.platform}-${process.arch}-${configureFlags}`
+const makeCacheKey = (openrestyVersion, configureFlags) => `openresty:${openrestyVersion}:${process.platform}:${process.arch}:${configureFlags}`
 
 const main = async () => {
   const openrestyVersion = core.getInput('openrestyVersion', { required: true })
@@ -56,7 +56,7 @@ const main = async () => {
   })
 
   if (core.getInput('buildCache') == 'true' && !restoredCache) {
-    core.notice(`Storing into cache...`)
+    core.notice(`Storing into cache: ${cacheKey}`)
     try {
       await cache.saveCache(cachePaths, cacheKey)
     } catch (e) {
