@@ -22,6 +22,13 @@ const main = async () => {
     cwd: extractPath
   })
 
+  await exec.exec(`make`, undefined, {
+    cwd: extractPath
+  })
+
+  await exec.exec(`make install`, undefined, {
+    cwd: extractPath
+  })
 }
 
 
