@@ -3,6 +3,7 @@ const core = require("@actions/core")
 const exec = require("@actions/exec")
 const io = require("@actions/io")
 const tc = require("@actions/tool-cache")
+const cache = require("@actions/cache")
 
 const path = require("path")
 
