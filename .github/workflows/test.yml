@@ -20,3 +20,5 @@ jobs:
     - name: test resty
       run: resty -e 'print("hi from lua")'
 
+    - name: test opm
+      run: opm --cwd install leafo/pgmoon
