@@ -10,3 +10,11 @@
 ### `openrestyVersion`
 
 **Default**: `"1.19.9.1"`
+
+### `configureFlags`
+
+**Default**: `null`
+
+### `buildCache`
+
+**Default**: `"true"`

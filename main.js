@@ -24,7 +24,11 @@ const main = async () => {
 
   if (core.getInput('buildCache') == 'true') {
     restoredCache = await cache.restoreCache(cachePaths, cacheKey)
-    core.notice(`Cache restored: ${restoredCache}`)
+    if (restoredCache) {
+      core.notice(`Cache restored: ${restoredCache}`)
+    } else {
+      core.notice(`No cache available, clean build`)
+    }
   }
 
   if (!restoredCache) {
