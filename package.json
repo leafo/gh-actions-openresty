@@ -1,0 +1,25 @@
+{
+  "name": "gh-actions-openresty",
+  "version": "1.0.0",
+  "description": "Install OpenResty inside of your GitHub Actions runner",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leafo/gh-actions-openresty.git"
+  },
+  "author": "leaf corcoran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leafo/gh-actions-openresty/issues"
+  },
+  "homepage": "https://github.com/leafo/gh-actions-openresty#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/exec": "^1.1.0",
+    "@actions/io": "^1.1.1",
+    "@actions/tool-cache": "^1.7.1"
+  }
+}
