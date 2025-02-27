@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        openrestyVersion: ["1.19.9.1"]
+        openrestyVersion: ["1.19.9.1", "1.27.1.1"]
         buildCache: ["true", "false"]
 
     runs-on: ubuntu-latest
