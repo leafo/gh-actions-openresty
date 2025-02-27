@@ -19,16 +19,6 @@ const main = async () => {
 
   const extractPath = path.join(process.cwd(), BUILD_PREFIX, `openresty-${openrestyVersion}`)
 
-  // Install prerequisites
-  if (process.platform === 'linux') {
-    notice("Installing prerequisites for Linux")
-    await exec.exec('sudo apt-get install -q libpcre3-dev build-essential', undefined, {
-      env: {
-        DEBIAN_FRONTEND: "noninteractive",
-        TERM: "linux"
-      }
-    })
-  }
 
   const cachePaths = [BUILD_PREFIX]
   const cacheKey = makeCacheKey(openrestyVersion, configureFlags || "")
@@ -45,6 +35,17 @@ const main = async () => {
   }
 
   if (!restoredCache) {
+    // Install prerequisites
+    if (process.platform === 'linux') {
+      notice("Installing prerequisites for Linux")
+      await exec.exec('sudo apt-get install -q libpcre3-dev build-essential', undefined, {
+        env: {
+          DEBIAN_FRONTEND: "noninteractive",
+          TERM: "linux"
+        }
+      })
+    }
+
     const sourceTar = await tc.downloadTool(`https://openresty.org/download/openresty-${openrestyVersion}.tar.gz`)
 
     await io.mkdirP(extractPath)
