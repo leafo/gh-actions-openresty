@@ -27,7 +27,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: leafo/gh-actions-openresty@v1
       with:
-        openrestyVersion: "1.19.9.1"
+        openrestyVersion: "1.27.1.1"
 
     - name: run resty
       run: resty -e 'print("hi from lua")'
@@ -46,7 +46,7 @@ jobs:
 
 ### `openrestyVersion`
 
-**Default**: `"1.19.9.1"`
+**Default**: `"1.27.1.1"`
 
 The version to install, see https://openresty.org/en/download.html#source-code-releases for a list of available versions.
 
