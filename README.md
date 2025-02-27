@@ -36,7 +36,7 @@ jobs:
       run: opm --cwd install leafo/pgmoon
 
     # This will install luarocks, configured to use luajit that comes with openresty
-    - uses: leafo/gh-actions-luarocks@v4
+    - uses: leafo/gh-actions-luarocks@latest
       with:
         withLuaPath: "/usr/local/openresty/luajit/"
 ```
