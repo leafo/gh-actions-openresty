@@ -25,7 +25,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - uses: leafo/gh-actions-openresty@v1
+    - uses: leafo/gh-actions-openresty@v2
       with:
         openrestyVersion: "1.27.1.1"
 
