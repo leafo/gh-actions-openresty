@@ -4,7 +4,6 @@ const exec = require("@actions/exec")
 const io = require("@actions/io")
 const tc = require("@actions/tool-cache")
 const cache = require("@actions/cache")
-
 const notice = (msg) => core.notice(`gh-actions-openresty: ${msg}`)
 const warning = (msg) => core.warning(`gh-actions-openresty: ${msg}`)
 
@@ -19,6 +18,17 @@ const main = async () => {
   const configureFlags = core.getInput('configureFlags')
 
   const extractPath = path.join(process.cwd(), BUILD_PREFIX, `openresty-${openrestyVersion}`)
+
+  // Install prerequisites
+  if (process.platform === 'linux') {
+    notice("Installing prerequisites for Linux")
+    await exec.exec('sudo apt-get install -q libpcre3-dev build-essential', undefined, {
+      env: {
+        DEBIAN_FRONTEND: "noninteractive",
+        TERM: "linux"
+      }
+    })
+  }
 
   const cachePaths = [BUILD_PREFIX]
   const cacheKey = makeCacheKey(openrestyVersion, configureFlags || "")

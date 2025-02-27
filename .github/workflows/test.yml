@@ -15,11 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: Install Prerequisites
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libpcre3-dev build-essential
-
     - uses: leafo/gh-actions-openresty@main
       with:
         openrestyVersion: ${{ matrix.openrestyVersion }}
