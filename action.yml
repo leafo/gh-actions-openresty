@@ -9,7 +9,7 @@ inputs:
   openrestyVersion:
     description: "The version to install, see https://openresty.org/en/download.html#source-code-releases"
     required: false
-    default: "1.19.9.1"
+    default: "1.27.1.1"
   configureFlags:
     description: "Command line flags passed to configure"
     default: "--with-pcre-jit --with-ipv6"
